@@ -64,6 +64,6 @@ class Comment(models.Model):
         self.reit_com += 1
         self.save()
 
-    def dislike(self):
+    def dislike(self):cd
         self.reit_com -= 1
         self.save()
