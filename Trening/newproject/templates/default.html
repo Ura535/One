@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+    <body>
+       {% block title %}
+       <h2>{{ flatpage.title }}</h2>
+       {% endblock title %}
+       <hr>
+       {% block content %}
+       {{ flatpage.content }}
+       {% endblock content %}
+    </body>
+</html>
