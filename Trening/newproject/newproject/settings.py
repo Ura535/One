@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'fpages',
 ]
 SITE_ID = 1
 MIDDLEWARE = [

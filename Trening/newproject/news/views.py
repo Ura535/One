@@ -4,11 +4,11 @@ from django.shortcuts import render
 # Импортируем класс, который говорит нам о том,
 # что в этом представлении мы будем выводить список объектов из БД
 from django.views.generic import ListView
-from .models import Post
+from .models import Post, Category
 
 
 class NewsList(ListView):
-    # Указываем модель, объекты которой мы будем выводить
+
     model = Post
     # Поле, которое будет использоваться для сортировки объектов
     ordering = 'title'
