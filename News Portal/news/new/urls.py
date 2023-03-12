@@ -1,6 +1,7 @@
 from django.urls import path
 # Импортируем созданное нами представление
-from .views import NewsList
+from .views import NewList
+
 urlpatterns = [
    # path — означает путь.
    # В данном случае путь ко всем новостям у нас останется пустым,

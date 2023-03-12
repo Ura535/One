@@ -1,8 +1,6 @@
 from django.shortcuts import render
 
 # Create your views here.
-# Импортируем класс, который говорит нам о том,
-# что в этом представлении мы будем выводить список объектов из БД
 from django.views.generic import ListView
 from .models import Post, Category
 
@@ -11,7 +9,7 @@ class NewList(ListView):
 
     model = Post
     # Поле, которое будет использоваться для сортировки объектов
-    ordering = 'title'
+    ordering = 'time_in'
     # Указываем имя шаблона, в котором будут все инструкции о том,
     # как именно пользователю должны быть показаны наши объекты
     template_name = 'posts.html'
