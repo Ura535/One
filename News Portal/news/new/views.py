@@ -3,9 +3,9 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import ListView
 from .models import Post, Category
+from datetime import datetime
 
-
-class NewList(ListView):
+class PostList(ListView):
 
     model = Post
     # Поле, которое будет использоваться для сортировки объектов

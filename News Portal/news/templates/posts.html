@@ -1,0 +1,39 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+   <h1>News</h1>
+   <h3>{{ time_now|date:'D f Y' }}</h3>
+   <!-- Если в переменной next_sale будет None,
+   то выведется указанный в фильтре текст -->
+   <h3> {{ next_words|default_if_none:23 }} </h3>
+   <h3> {{ posts|length }} </h3>
+
+   <hr>
+   {% if posts %}
+       <table>
+           <tr>
+               <td>Название</td>
+               <td>Описание</td>
+               <td>Категория</td>
+
+           </tr>
+
+           {% for posts in posts %}
+           <tr>
+               <td>{{ posts.title}}</td>
+               <td>{{ posts.text }}</td>
+               <td>{{ posts.typ }}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Post Not!</h2>
+   {% endif %}
+{% endblock content %}
