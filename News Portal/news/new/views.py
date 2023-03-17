@@ -16,7 +16,7 @@ class PostList(ListView):
     # Это имя списка, в котором будут лежать все объекты.
     # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
     context_object_name = 'posts'
-
+    paginate_by = 2  # вот так мы можем указать количество зап
 
 
 class PostDetail(DetailView):
@@ -26,4 +26,3 @@ class PostDetail(DetailView):
     template_name = 'post.html'
     # Название объекта, в котором будет выбранный пользователем продукт
     context_object_name = 'post'
-    paginate_by = 2  # вот так мы можем указать количество зап
