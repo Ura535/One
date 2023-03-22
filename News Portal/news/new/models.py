@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
 # Create your models here.
+from django.core.validators import MinValueValidator
+from django.urls import reverse
+
 
 
 from new.recv import POSITIONS
@@ -50,6 +53,12 @@ class Post(models.Model):
     def preview(self):
         return f'{self.text[0:124]}...'
 
+    def __str__(self):
+        return f'{self.title()}: {self.text[:10]}'
+
+    def get_absolute_url(self):
+        return reverse('new', args=[str(self.id)])
+
 class PostCategory(models.Model):
     post_cat = models.ForeignKey(Post, on_delete=models.CASCADE)
     category_cat = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -57,6 +66,9 @@ class PostCategory(models.Model):
 
     def __str__(self):
         return f'{self.category_cat}:{self.post_cat}'
+
+
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

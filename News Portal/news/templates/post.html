@@ -1,7 +1,7 @@
 <!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
 {% extends 'flatpages/default.html' %}
 
-<!-- Название у нас будет Product -->
+<!-- Название у нас будет News -->
 {% block title %}
 News
 {% endblock title %}
@@ -11,7 +11,7 @@ News
 <h1>{{ post }}</h1>
 <h1>{{ post.title }}</h1>
 <h1>{{ post.text }}</h1>
-<h1>{{ post.data_time|date:'M d Y' }}</h1>
+<h1>{{ post.time_in|date:'M d Y' }}</h1>
 
 
 {% endblock content %}
