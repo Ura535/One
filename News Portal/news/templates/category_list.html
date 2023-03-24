@@ -1,0 +1,71 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block content %}
+
+
+    <h1>News</h1>
+    <hr>
+
+
+<!--filter (reserch in title, username, date)-->
+     <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Submit" />
+   </form>
+
+
+
+<!--table-->
+   {% if category_list %}
+       <table cellspacing="1" cellpadding="2" border="2" width="50%">
+           <tr>
+               <td>Author</td>
+               <td>Category</td>
+               <td>Title</td>
+               <td>Date</td>
+               <td>Description</td>
+           </tr>
+           {% for post in category_list %}
+           <tr>
+               <td>{{ post.author_relation }}</td>
+               {% for category in post.category_relations.all %}
+               <td>{{ category }}</td>
+               {% endfor %}
+               <td>{{ post.title|truncatechars:25|censor:'health' }}</td>
+               <td>{{ post.time_in|date:'d.m.y G:i' }}</td>
+               <td>{{ post.text|truncatechars:20|censor:'health' }}</td>
+           </tr>
+           {% endfor %}
+       </table>
+    {% endif %}
+
+<!--pagination-->
+{% if page_obj.has_previous %}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+
+   {{ page_obj.number }}
+
+   {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
+{% if is_not_subscriber %}
+<p class="text-center"><a href="{% url 'subscribe' category.id %}" class="btn btn-info btn-sm"> Subscribe </a> </p>
+{% endif %}
+
+</center>
+
+{% endblock content %}

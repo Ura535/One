@@ -13,6 +13,15 @@ class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     author_rating = models.IntegerField(default=0)
 
+    def update_rating(self):
+        self.post_set.all().aggregate(post_rating=Sum('post_rating') * 3)
+        self.user.comment_set.all().aggregate(com_rating=Sum('comment_rating'))
+        Author.objects.filter(author_rating=Sum(post__author=self.id))
+        self.save()
+
+    def __str__(self):
+        return f'{self.user}'
+
 
 
 class Category(models.Model):
@@ -21,7 +30,7 @@ class Category(models.Model):
     politica= 'PO'
     economy= 'EC'
     category = models.CharField(max_length=2, choices=POSITIONS, unique=True)
-    # subscriber = models.ManyToManyField(User, blank=True, null=True)
+    subscriber = models.ManyToManyField(User, blank=True, null=True)
 
 class Post(models.Model):
     artic = 'AR'
@@ -54,10 +63,10 @@ class Post(models.Model):
         return f'{self.text[0:124]}...'
 
     def __str__(self):
-        return f'{self.title()}: {self.text[:10]}'
+        return f'{self.title.title()}: {self.text[:10]}'
 
     def get_absolute_url(self):
-        return reverse('new', args=[str(self.id)])
+        return reverse('post_detail', args=[str(self.id)])
 
 class PostCategory(models.Model):
     post_cat = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -80,10 +89,13 @@ class Comment(models.Model):
     def like(self):
         self.reit_com += 1
         self.save()
+        return self.reit_com
 
     def dislike(self):
         self.reit_com -= 1
         self.save()
+        return self.reit_com
+
     def __str__(self):
         return f'{self.text_com}'
 

@@ -19,7 +19,7 @@ class PostForm(forms.ModelForm):
         title = cleaned_data.get("title")
         if title is not None and len(title) < 10:
             raise ValidationError({
-                "title": "Couldn't be less then 10 symbols."
+                "title": "Описание не может быть меньше 10 символов"
             })
         return cleaned_data
 
