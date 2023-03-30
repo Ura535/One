@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qrk2a11v78$-&dh)$ikkd^x-dc%30e^f1-dzra)*+e#l4nha%$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'new',
     'django_filters',
-
+    'sign',
+    'protect'
 
 ]
 SITE_ID = 1
@@ -73,6 +74,8 @@ TEMPLATES = [
         },
     },
 ]
+LOGIN_URL = 'sign/login/'
+LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'news.wsgi.application'
 
