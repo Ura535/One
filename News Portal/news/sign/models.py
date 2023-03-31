@@ -22,7 +22,7 @@ class BaseRegisterForm(UserCreationForm):
                   "password1",
                   "password2",)
 
-
+# RegistBaseerForm
 class CommonSignupForm(SignupForm):
 
     def save(self, request):

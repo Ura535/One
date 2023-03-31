@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 class BaseRegisterView(CreateView):
     model = User
     form_class = BaseRegisterForm
-    success_url = '/new/'
+    success_url = '/new'
     # success_url = '/'
 
 @login_required
@@ -22,4 +22,4 @@ def upgrade_me(request):
     if not request.user.groups.filter(name='authors').exists():
         authors_group.user_set.add(user)
     # return redirect('/')
-    return redirect('/new/')
+    return redirect('/new')
